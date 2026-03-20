@@ -1,0 +1,207 @@
+import React, { useState } from 'react';
+import { 
+  Beaker, 
+  BrainCircuit, 
+  Languages, 
+  ShieldCheck, 
+  Sparkles, 
+  ChevronRight, 
+  FlaskConical, 
+  Atom,
+  Scale,
+  MessageSquare,
+  Search,
+  BookOpen,
+  ArrowRight,
+  ClipboardCheck,
+  Zap,
+  ShieldAlert
+} from 'lucide-react';
+
+export default function App() {
+  const [activeModule, setActiveModule] = useState('ethics');
+  const [inputValue, setInputValue] = useState('');
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const handleGenerate = () => {
+    if (!inputValue) return;
+    setIsGenerating(true);
+    setTimeout(() => setIsGenerating(false), 2000);
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-teal-200">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-2 cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+              <div className="bg-gradient-to-br from-teal-500 to-blue-600 p-2 rounded-lg text-white">
+                <Atom size={24} />
+              </div>
+              <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-blue-600">
+                AI Chem Lab
+              </span>
+            </div>
+            <div className="hidden md:flex space-x-8">
+              <button className="text-slate-600 hover:text-teal-600 font-medium transition-colors">수업 소개</button>
+              <button 
+                onClick={() => setActiveModule('ethics')}
+                className={`font-medium transition-colors ${activeModule === 'ethics' ? 'text-teal-600' : 'text-slate-600 hover:text-teal-600'}`}
+              >
+                1. AI 윤리
+              </button>
+              <button 
+                onClick={() => setActiveModule('learning')}
+                className={`font-medium transition-colors ${activeModule === 'learning' ? 'text-teal-600' : 'text-slate-600 hover:text-teal-600'}`}
+              >
+                2. AI 학습도구
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative bg-white pt-20 pb-24 overflow-hidden">
+        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-teal-50 rounded-full blur-3xl opacity-60"></div>
+        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 bg-blue-50 rounded-full blur-3xl opacity-60"></div>
+        
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col items-center text-center">
+            <div className="inline-flex items-center space-x-2 bg-teal-50 text-teal-700 px-4 py-2 rounded-full text-sm font-bold mb-8 border border-teal-100 shadow-sm">
+              <FlaskConical size={18} className="animate-bounce" />
+              <span>화학 선생님의 스마트한 AI 기초 수업</span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-8 leading-[1.1]">
+              데이터의 반응으로 <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 via-blue-500 to-indigo-600">
+                새로운 지능
+              </span>을 합성하다
+            </h1>
+            <p className="text-xl text-slate-600 mb-12 max-w-2xl leading-relaxed">
+              복잡한 화학 반응식처럼 인공지능도 정교한 구조와 원리가 있습니다. <br className="hidden md:block"/>
+              우리는 올바른 가치관(윤리) 위에 강력한 도구(AI)를 설계하는 법을 배웁니다.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <button 
+                onClick={() => setActiveModule('ethics')}
+                className="group px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all flex items-center gap-2 shadow-xl hover:shadow-slate-200"
+              >
+                AI 윤리 가이드
+                <ShieldCheck size={20} className="group-hover:rotate-12 transition-transform" />
+              </button>
+              <button 
+                onClick={() => setActiveModule('learning')}
+                className="group px-8 py-4 bg-teal-500 text-white rounded-2xl font-bold hover:bg-teal-600 shadow-xl shadow-teal-100 transition-all flex items-center gap-2"
+              >
+                AI 학습도구 체험
+                <Sparkles size={20} className="group-hover:scale-125 transition-transform" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Interactive Section */}
+      <section className="py-24 bg-slate-50 relative">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Module Selection Tabs */}
+          <div className="flex justify-center mb-16">
+            <div className="inline-flex p-1.5 bg-slate-200/50 backdrop-blur-sm rounded-2xl border border-slate-200">
+              <button 
+                onClick={() => setActiveModule('ethics')}
+                className={`flex items-center gap-2 px-8 py-3 rounded-xl font-bold transition-all ${activeModule === 'ethics' ? 'bg-white text-teal-600 shadow-md scale-[1.02]' : 'text-slate-500 hover:text-slate-700'}`}
+              >
+                <Scale size={20} />
+                주제 1: AI 윤리
+              </button>
+              <button 
+                onClick={() => setActiveModule('learning')}
+                className={`flex items-center gap-2 px-8 py-3 rounded-xl font-bold transition-all ${activeModule === 'learning' ? 'bg-white text-teal-600 shadow-md scale-[1.02]' : 'text-slate-500 hover:text-slate-700'}`}
+              >
+                <Languages size={20} />
+                주제 2: 학습 프로그램
+              </button>
+            </div>
+          </div>
+
+          {/* Module 1: AI Ethics */}
+          {activeModule === 'ethics' && (
+            <div className="grid lg:grid-cols-12 gap-12 items-start animate-in fade-in slide-in-from-bottom-6 duration-700">
+              <div className="lg:col-span-7 space-y-8">
+                <div className="inline-block p-3 bg-teal-100 text-teal-600 rounded-2xl mb-2">
+                  <ShieldAlert size={32} />
+                </div>
+                <h2 className="text-4xl font-bold text-slate-900 leading-tight">
+                  실험 전 '안전 교육'이 필수이듯,<br/>
+                  인공지능은 <span className="text-teal-500 underline decoration-teal-200 underline-offset-8">윤리</span>가 필수입니다
+                </h2>
+                <p className="text-lg text-slate-600 leading-relaxed">
+                  화학 물질을 다룰 때 주의사항을 숙지하지 않으면 사고가 나듯, 인공지능 역시 잘못된 활용은 사회적 재앙을 초래할 수 있습니다. 
+                  우리는 세 가지 핵심 가치를 중심으로 AI의 그림자를 살펴봅니다.
+                </p>
+                
+                <div className="grid sm:grid-cols-1 gap-4">
+                  {[
+                    { title: "편향성 (Bias) 차단", desc: "데이터에 섞인 '불순물(편견)'이 결과값을 오염시키지 않도록 정제하는 법을 배웁니다.", icon: <Beaker size={20}/> },
+                    { title: "알고리즘의 투명성", desc: "AI의 블랙박스를 열어 결과가 도출된 논리적 과정을 추적합니다.", icon: <Search size={20}/> },
+                    { title: "공존을 위한 책임", desc: "기술의 주체는 항상 인간임을 명심하고, 결과에 책임지는 태도를 갖춥니다.", icon: <ClipboardCheck size={20}/> }
+                  ].map((item, i) => (
+                    <div key={i} className="group p-6 bg-white rounded-2xl border border-slate-200 hover:border-teal-400 hover:shadow-lg transition-all flex items-start gap-5">
+                      <div className="bg-slate-50 group-hover:bg-teal-50 p-3 rounded-xl text-slate-400 group-hover:text-teal-600 transition-colors">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-xl text-slate-900 mb-2">{item.title}</h4>
+                        <p className="text-slate-500 leading-relaxed">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="lg:col-span-5 sticky top-24">
+                <div className="bg-white p-8 rounded-[2rem] shadow-2xl border border-slate-100 overflow-hidden relative group">
+                  <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-teal-400 to-blue-500"></div>
+                  <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
+                    <MessageSquare className="text-blue-500" />
+                    오늘의 토론 과제
+                  </h3>
+                  
+                  <div className="space-y-6">
+                    <div className="bg-slate-50 p-6 rounded-2xl border-l-4 border-teal-500 relative">
+                      <span className="absolute -top-3 left-6 bg-teal-500 text-white text-[10px] px-2 py-1 rounded-full font-bold uppercase tracking-widest">Topic</span>
+                      <p className="text-slate-800 font-medium leading-relaxed italic">
+                        "AI가 작성한 화학 논문의 저작권은 누구에게 있을까요? 인간 연구원일까요, AI일까요?"
+                      </p>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-3 p-4 bg-slate-50/50 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer group">
+                        <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-500 group-hover:text-white transition-all">1</div>
+                        <span className="text-sm font-medium text-slate-700">생성형 AI의 데이터 무단 수집 문제</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-4 bg-slate-50/50 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer group">
+                        <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-500 group-hover:text-white transition-all">2</div>
+                        <span className="text-sm font-medium text-slate-700">딥페이크 기술과 디지털 성범죄 예방</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-4 bg-slate-50/50 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer group">
+                        <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-500 group-hover:text-white transition-all">3</div>
+                        <span className="text-sm font-medium text-slate-700">자율주행 자동차의 사고 판단 윤리</span>
+                      </div>
+                    </div>
+
+                    <button className="w-full py-4 bg-teal-500 text-white font-bold rounded-2xl hover:bg-teal-600 shadow-lg shadow-teal-100 transition-all">
+                      자신의 의견 제출하기
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Module 2: AI Learning App */}
+          {activeModule === 'learning' && (
+            <div className="grid lg:grid-cols-2 gap-16 items-center animate-in fade-in slide-in-from-bottom-6 duration-
